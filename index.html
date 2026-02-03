@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TRS FabLab - Gestion d'imprimantes 3D</title>
+	
+	<!-- Google Fonts - Inter -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+	
+	<!-- Libraries -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/luxon@1.27.0"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.0.0"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@2.0.0"></script>
+	
+	<!-- Icons - Font Awesome 6 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	
+	<!-- CSS -->
+	<link rel="stylesheet" href="css/main.css">
+	
+	<!-- Scripts -->
+	<script src="script.js"></script>
+	<script src="md5-min.js"></script>
+	
+	<link rel="icon" type="image/png" href="img/icon.png">
+</head>
+<body>
+<div id="main-wrapper">
+    	<div class="Container" id="observateur" >
+        	<header>
+				<div class="userimg">
+					<img src="img/3135715.png" alt="Logo" />
+				</div>
+				<div class="utilisateur">
+					<span>TRS FabLab</span>
+				</div>
+            	<div class="connexion">
+               		<button onclick="document.getElementById('id01').style.display='block'" class="btnconnexion"><i class="fa-solid fa-right-to-bracket"></i> Connexion</button>
+            	</div>
+				
+            	<div id="id01" class="modal">
+ 
+            	<div class="modal-content animate">
+                	<div class="imgcontainer">
+                    	<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    	<img src="img/3135715.png" alt="Avatar" class="avatar">
+                	</div>
+ 
+                	<div class="container">
+                    	<label for="username">Utilisateur</label>
+                    	<input type="text" id="username" placeholder="Entrez votre identifiant" name="username" required>
+ 
+                    	<label for="password">Mot de passe</label>
+                    	<input type="password" id="password" placeholder="Entrez votre mot de passe" name="password" required>
+                   	 
+                    	<button class="btnconnect" type="submit" onclick="dmdConnexion()"><i class="fa-solid fa-arrow-right-to-bracket"></i> Se connecter</button>
+                    	
+                    	<label for="remember" style="margin-top: 12px;">
+                        	<input type="checkbox" checked="checked" name="remember" id="remember"> Se souvenir de moi
+						</label>
+                    	
+                    	<div class="test-credentials">
+                        	<strong>🔐 Comptes de démonstration :</strong><br><br>
+                        	<i class="fa-solid fa-user"></i> Utilisateur : <code>user</code> / <code>user123</code><br>
+                        	<i class="fa-solid fa-user-shield"></i> Admin : <code>admin</code> / <code>admin123</code>
+                    	</div>
+                	</div>
+ 
+                	<div class="container" style="background-color:#f1f1f1">
+                    	<button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Annuler</button>
+                    	<span class="psw"><a href="#">Oublie de mot de passe?</a></span>
+                	</div>
+            	</div>
+            	</div>
+       	 
+           	 
+        	</header>
+         	 <nav>
+            	<ul class="nav">
+                	<li><a onclick="accueil()" class="accueil actif"><i class="fa-solid fa-house"></i> Accueil</a></li>
+                	<li><a onclick="imprimante()" class="imprimante"><i class="fa-solid fa-print"></i> Imprimantes</a></li>
+                	<li><a onclick="TRS()"><i class="fa-solid fa-chart-pie"></i> Taux de rendement</a></li>
+					<li><a onclick="graph()" class="graph"><i class="fa-solid fa-chart-line"></i> Graphiques</a></li>
+            	</ul>
+        	</nav>
+			
+       	 	<div id="pageAccueilO">
+
+       	 
+			<h1><i class="fa-solid fa-cube"></i> Ordres de Fabrication</h1>
+        	<div class="content" id="content" >
+            	<section class="main_articles">
+                	<article class="siteDescription">
+                    	<div class="desImage">
+							<img src="img/3135715.png" alt="FabLab">
+						</div>
+                    	<div class="des">
+                        	<span>Bienvenue sur TRS FabLab ! Consultez les ordres de fabrication en cours, le taux de rendement de chaque imprimante 3D, ainsi que leur état en temps réel. Connectez-vous pour accéder à plus de fonctionnalités.</span>
+                    	</div>
+                	</article>
+            	</section>
+          
+           	 
+            	
+           	 
+           	 
+                	<div class=tab>
+                    	<table class="tableau-style">
+                        	<thead>
+                            	<tr>
+                                	<th> Ordre de fabrication</th>
+                                	<th> Utilisateur</th>
+                                	<th> Nom pièce</th>
+                                	<th> Imprimante</th>
+                                	<th> Coût</th>
+                                	<th> Etat</th>
+                                	<th> Durée</th>
+                            	</tr>
+                        	</thead>
+                        	<tbody>
+                            	<tr>
+                                	<td>
+                                    	1
+                                	</td>
+                                	<td>
+                                    	Jeremy
+                                	</td>
+                                	<td>
+                                    	Maquette 
+                                	</td>
+                                	<td>
+                                    	i02
+                                	</td>
+                                	<td>
+                                		6e
+                                	</td>
+                                	<td>
+                                    	En cours
+                                	</td>
+                                	<td>
+                                    	1j02h31m
+                                	</td>
+                            	</tr>
+                            	<tr>
+                                	<td>
+                                    	2
+                                	</td>
+                                	<td>
+                                    	Claire
+                                	</td>
+                                	<td>
+                                    	Maquette
+                                	</td>
+                                	<td>
+                                    	i01
+                                	</td>
+                                	<td>
+                                    	20e
+                                	</td>
+                                	<td>
+                                		En cours
+                                	</td>
+                                	<td>
+                                    	0j0h30min
+                                	</td>
+                            	</tr>
+                            	<tr>
+                                	<td>
+                                    	3
+                                	</td>
+                                	<td>
+                                    	Chris
+                                	</td>
+                                	<td>
+                                    	Maquette
+                                	</td>
+                                	<td>
+                                    	i01
+                                	</td>
+                                	<td>
+										5e
+                                	</td>
+                                	<td>
+                                    	Terminé
+                                	</td>
+                                	<td>
+                                    	Terminé
+                                	</td>
+                            	</tr>
+                            	<tr>
+                                	<td>
+                                    	4
+                                	</td>
+                                	<td>
+                                    	Paul
+                                	</td>
+                                	<td>
+                                    	Maquette
+                                	</td>
+                                	<td>
+                                    	i02
+                                	</td>
+                                	<td>
+                                    	3e
+                                	</td>
+                                	<td>
+										Terminé
+                                	</td>
+                                	<td>
+                                    	Terminé
+                                	</td>
+                            	</tr>
+                            	<tr>
+                                	<td>
+										5
+                                	</td>
+                                	<td>
+                                    	Cedric
+                                	</td>
+                                	<td>
+                                    	Maquette
+                                	</td>
+                                	<td>
+                                    	i02
+                                	</td>
+                                	<td>
+                                    	12e
+                                	</td>
+                                	<td>
+										Terminé
+                                	</td>
+                                	<td>
+                                    	Terminé
+                                	</td>
+                            	</tr>
+                           	 
+                        	</tbody>
+                    	</table>
+                	</div>
+    		</div>
+			</div>
+        	
+
+		</div>
+ 				<!-------------------------------------- Page Utilisateur </-------------------------------------------->
+
+			<div class="Container" id="utilisateur" style="display:none">
+        	<header>
+                <div class="userimg">
+                    <img src="img/3135715.png" alt="Utilisateur" />
+                </div>
+                
+                <div class="utilisateur">
+                    <span><i class="fa-solid fa-user"></i> Utilisateur</span>
+                </div>
+				
+				<div class="btnDeconnexion">
+					<button class="deconnexion" onclick="deconnexion()"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</button>
+				</div>
+            </header>
+         	 <nav>
+            	<ul class="nav">
+                	<li><a onclick="accueilU()" class="accueil actif"><i class="fa-solid fa-house"></i> Accueil</a></li>
+                	<li><a onclick="imprimante()" class="imprimante"><i class="fa-solid fa-print"></i> Imprimantes</a></li>
+                	<li><a onclick="TRS()"><i class="fa-solid fa-chart-pie"></i> Taux de rendement</a></li>
+					<li><a onclick="graph()" class="graph"><i class="fa-solid fa-chart-line"></i> Graphiques</a></li>
+            	</ul>
+        	</nav>
+       	 <div id="pageAccueilU">
+        	<div class="content" id="content" >
+           	 		<h1><i class="fa-solid fa-clipboard-list"></i> Mes Ordres de Fabrication</h1> 
+                	<div id=tabU class=tab>
+                    	<table class="tableau-style">
+                        	<thead>
+                            	<tr>
+                                	<th> Ordre de fabrication</th>
+                                	<th> Utilisateur</th>
+                                	<th> Nom pièce</th>
+                                	<th> Imprimante</th>
+                                	<th> Coût</th>
+                                	<th> Etat</th>
+                                	<th> Durée</th>
+                            	</tr>
+                        	</thead>
+                        	<tbody>
+                            	<tr>
+                                	<td>
+                                    	1
+                                	</td>
+                                	<td>
+                                    	Jeremy
+                                	</td>
+                                	<td>
+                                    	Maquette 
+                                	</td>
+                                	<td>
+                                    	i02
+                                	</td>
+                                	<td>
+                                		6e
+                                	</td>
+                                	<td>
+                                    	En cours
+                                	</td>
+                                	<td>
+                                    	1j02h31m
+                                	</td>
+                            	</tr>
+                            	<tr>
+                                	<td>
+                                    	2
+                                	</td>
+                                	<td>
+                                    	Claire
+                                	</td>
+                                	<td>
+                                    	Maquette
+                                	</td>
+                                	<td>
+                                    	i01
+                                	</td>
+                                	<td>
+                                    	20e
+                                	</td>
+                                	<td>
+                                		En cours
+                                	</td>
+                                	<td>
+                                    	0j0h30min
+                                	</td>
+                            	</tr>
+                            	<tr>
+                                	<td>
+                                    	3
+                                	</td>
+                                	<td>
+                                    	Chris
+                                	</td>
+                                	<td>
+                                    	Maquette
+                                	</td>
+                                	<td>
+                                    	i01
+                                	</td>
+                                	<td>
+										5e
+                                	</td>
+                                	<td>
+                                    	Terminé
+                                	</td>
+                                	<td>
+                                    	Terminé
+                                	</td>
+                            	</tr>
+                            	<tr>
+                                	<td>
+                                    	4
+                                	</td>
+                                	<td>
+                                    	Paul
+                                	</td>
+                                	<td>
+                                    	Maquette
+                                	</td>
+                                	<td>
+                                    	i02
+                                	</td>
+                                	<td>
+                                    	3e
+                                	</td>
+                                	<td>
+										Terminé
+                                	</td>
+                                	<td>
+                                    	Terminé
+                                	</td>
+                            	</tr>
+                            	<tr>
+                                	<td>
+										5
+                                	</td>
+                                	<td>
+                                    	Cedric
+                                	</td>
+                                	<td>
+                                    	Maquette
+                                	</td>
+                                	<td>
+                                    	i02
+                                	</td>
+                                	<td>
+                                    	12e
+                                	</td>
+                                	<td>
+										Terminé
+                                	</td>
+                                	<td>
+                                    	Terminé
+                                	</td>
+                            	</tr>
+                           	 
+                        	</tbody>
+                    	</table>
+                	</div>
+    	</div>
+			 
+		</div> 
+        	
+ 
+			
+    		
+       	 			
+       	 
+        	
+    	</div>
+	
+				<!-------------------------------------- Page Administrateur </-------------------------------------------->
+
+			<div class="Container" id="admin" style="display:none">
+        	<header>
+                <div class="userimgA">
+                    <img src="img/admin5.png" alt="Admin" />
+                </div>
+                
+                <div class="utilisateur">
+                    <span><i class="fa-solid fa-user-shield"></i> Administrateur</span>
+                </div>
+				
+				<div class="btnDeconnexion">
+					<button class="deconnexion" onclick="deconnexion()"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</button>
+				</div>
+            </header>
+         	 <nav>
+            	<ul class="nav">
+                	<li><a onclick="accueilA()" class="accueil actif"><i class="fa-solid fa-house"></i> Accueil</a></li>
+                	<li><a onclick="imprimante()" class="imprimante"><i class="fa-solid fa-print"></i> Imprimantes</a></li>
+                	<li><a onclick="TRS()"><i class="fa-solid fa-chart-pie"></i> Taux de rendement</a></li>
+					<li><a onclick="graph()" class="graph"><i class="fa-solid fa-chart-line"></i> Graphiques</a></li>
+					<li><a onclick="gestionUser()" class="gestionU"><i class="fa-solid fa-users-gear"></i> Utilisateurs</a></li>
+					<li><a onclick="camera()"><i class="fa-solid fa-video"></i> Caméra</a></li>
+            	</ul>
+        	</nav>
+       	 <div id="accueilA" style="display:none" >
+
+        	<div class="content" id="content" >
+           	   <h1><i class="fa-solid fa-clipboard-list"></i> Tous les Ordres de Fabrication</h1> 
+                	<div id=tabU class=tab>
+                    	<table class="tableau-style">
+                        	<thead>
+                            	<tr>
+                                	<th> Ordre de fabrication</th>
+                                	<th> Utilisateur</th>
+                                	<th> Nom pièce</th>
+                                	<th> Imprimante</th>
+                                	<th> Coût</th>
+                                	<th> Etat</th>
+                                	<th> Durée</th>
+                            	</tr>
+                        	</thead>
+                        	<tbody>
+                            	<tr>
+                                	<td>
+                                    	1
+                                	</td>
+                                	<td>
+                                    	Jeremy
+                                	</td>
+                                	<td>
+                                    	Maquette 
+                                	</td>
+                                	<td>
+                                    	i02
+                                	</td>
+                                	<td>
+                                		6e
+                                	</td>
+                                	<td>
+                                    	En cours
+                                	</td>
+                                	<td>
+                                    	1j02h31m
+                                	</td>
+                            	</tr>
+                            	<tr>
+                                	<td>
+                                    	2
+                                	</td>
+                                	<td>
+                                    	Claire
+                                	</td>
+                                	<td>
+                                    	Maquette
+                                	</td>
+                                	<td>
+                                    	i01
+                                	</td>
+                                	<td>
+                                    	20e
+                                	</td>
+                                	<td>
+                                		En cours
+                                	</td>
+                                	<td>
+                                    	0j0h30min
+                                	</td>
+                            	</tr>
+                            	<tr>
+                                	<td>
+                                    	3
+                                	</td>
+                                	<td>
+                                    	Chris
+                                	</td>
+                                	<td>
+                                    	Maquette
+                                	</td>
+                                	<td>
+                                    	i01
+                                	</td>
+                                	<td>
+										5e
+                                	</td>
+                                	<td>
+                                    	Terminé
+                                	</td>
+                                	<td>
+                                    	Terminé
+                                	</td>
+                            	</tr>
+                            	<tr>
+                                	<td>
+                                    	4
+                                	</td>
+                                	<td>
+                                    	Paul
+                                	</td>
+                                	<td>
+                                    	Maquette
+                                	</td>
+                                	<td>
+                                    	i02
+                                	</td>
+                                	<td>
+                                    	3e
+                                	</td>
+                                	<td>
+										Terminé
+                                	</td>
+                                	<td>
+                                    	Terminé
+                                	</td>
+                            	</tr>
+                            	<tr>
+                                	<td>
+										5
+                                	</td>
+                                	<td>
+                                    	Cedric
+                                	</td>
+                                	<td>
+                                    	Maquette
+                                	</td>
+                                	<td>
+                                    	i02
+                                	</td>
+                                	<td>
+                                    	12e
+                                	</td>
+                                	<td>
+										Terminé
+                                	</td>
+                                	<td>
+                                    	Terminé
+                                	</td>
+                            	</tr>
+                           	 
+                        	</tbody>
+                    	</table>
+                	</div>
+    	</div>
+		</div> 	
+
+       	 	
+			<!--------- Page Gestion des utilisateurs ----------->
+			
+		<div id="gestionUser" style="display:none">
+   		 <div class="content">
+			 <h1><i class="fa-solid fa-users-gear"></i> Gestion des utilisateurs</h1> 
+           <section class="main_article_temp">
+               <article class="Users">
+				   
+				   <ul class="Ulist">
+					   <div class="listUser">
+							<div class="userimg2">
+								 <img src="img/admin5.png" alt="Admin"/>
+							</div>
+							<li class="userList">
+								<span><i class="fa-solid fa-user-shield"></i> admin</span>
+						   	</li>
+					    </div>
+					   	<div class="listUser">
+							<div class="userimg2">
+								 <img src="img/3135715.png" alt="User"/>
+							</div>
+							<li class="userList">
+								<span><i class="fa-solid fa-user"></i> user</span>
+						   	</li>
+					    </div>
+				   </ul>
+			<!-- Boutons d'action -->
+                   <button onclick="document.getElementById('id02').style.display='block'" class="btnNewUser"><i class="fa-solid fa-user-plus"></i> Nouvel utilisateur</button>
+				  
+				   <div id="id02" class="modal">
+ 
+            	<div class="modal-content2 animate">
+                	<div class="imgcontainer">
+                    	<span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    	
+                	</div>
+ 
+                	<div class="container">
+                    	<label for="newUsername">Nom d'utilisateur</label>
+                    	<input type="text" id="newUsername" placeholder="Entrez le nom d'utilisateur" name="username" required>
+ 
+                    	<label for="newPassword">Mot de passe</label>
+                    	<input type="password" id="newPassword" placeholder="Entrez le mot de passe" name="password" required>
+                   	 
+                    	<button class="btnconnect" type="submit" onclick="fCreateNewUser()"><i class="fa-solid fa-check"></i> Confirmer</button>
+                	</div>
+ 
+                	<div class="container" style="background-color:#f1f1f1">
+                    	<button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Annuler</button>
+                    	
+                	</div>
+            	</div>
+            	</div>
+				   
+				   <!-- Suppression d'utilisateur -->
+				    <button class="btnNewUser2" onclick="document.getElementById('id03').style.display='block'" style="background-color: #ef4444;"><i class="fa-solid fa-user-minus"></i> Supprimer un utilisateur</button>
+				   
+				    <div id="id03" class="modal">
+ 
+            	<div class="modal-content2 animate">
+                	<div class="imgcontainer">
+                    	<span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    	
+                	</div>
+ 
+                	<div class="container">
+                    	<label for="username"><b>Utilisateur</b></label>
+                    	<input type="text" id="dUser" placeholder="Entrez l'utilisateur" name="username" required>
+                   	 
+                    	<button class="btnconnect" type="submit" onclick="fDeleteUser()" >Confirmer la suppression</button>
+                    	
+                    	
+                	</div>
+ 
+                	<div class="container" style="background-color:#f1f1f1">
+                    	<button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn">Annuler</button>
+                    	
+                	</div>
+				   </div>
+				</div>
+				   
+				   
+               </article>
+           </section>
+           	 
+            	
+        	</div>
+    		</div>	
+       	 
+        	
+    	</div>
+ 			<!--------- Page Graphiques ---------->
+			<div id="pageGraphO" style="display:none">
+				<div class="content">
+					<h1><i class="fa-solid fa-chart-line"></i> Monitoring en temps réel</h1>
+					<section class="main_article_temp">
+						<article class="graphique">
+							<div id="graph" class="stats_box">
+								<h4><i class="fa-solid fa-temperature-half"></i> Courbe de température</h4>
+								<canvas id="temperature" width="4" height="1"></canvas>
+								<h4><i class="fa-solid fa-droplet"></i> Courbe d'humidité</h4>
+								<canvas id="humidite" width="4" height="1"></canvas>
+							</div>
+						</article>
+					</section>
+				</div>
+			</div>
+		<!--------- Page Imprimantes ---------->
+		<div id="imprimante" style="display:none">
+   		 <div class="content">
+			 <h1><i class="fa-solid fa-print"></i> Gestion des imprimantes</h1> 
+           <section class="main_article_temp">
+               <article class="Imp">
+				   
+				   <div class="listImprimantes">
+				   	<div class="imprimantes" id="i01">
+						<div class="impImg">
+							<img class="imgImprimante" src="img/imprimante.png" alt="Imprimante i01"/>
+						</div>
+						<div class="impEtat">
+							<p><strong>Imprimante i01</strong></p>
+							<p><i class="fa-solid fa-circle" style="color: #10b981;"></i> État : Actif</p>
+						</div>
+					</div>
+					<div class="imprimantes" id="i02">
+						<div class="impImg">
+							<img class="imgImprimante" src="img/imprimante.png" alt="Imprimante i02"/>
+						</div>
+						<div class="impEtat">
+							<p><strong>Imprimante i02</strong></p>
+							<p><i class="fa-solid fa-circle" style="color: #10b981;"></i> État : Actif</p>
+						</div>
+					</div> 
+				   </div>
+				   
+			<!-- Boutons d'action -->
+                   <button onclick="document.getElementById('id04').style.display='block'" class="btnNewUser"><i class="fa-solid fa-plus"></i> Nouvelle imprimante</button>
+				  
+				   <div id="id04" class="modal">
+ 
+            	<div class="modal-content2 animate">
+                	<div class="imgcontainer">
+                    	<span onclick="document.getElementById('id04').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    	
+                	</div>
+ 
+                	<div class="container">
+                    	<label for="imprimanteid">Nom de l'imprimante</label>
+                    	<input type="text" id="imprimanteid" placeholder="Ex: i03" name="printer" required>
+                   	 
+                    	<button class="btnconnect" type="submit" onclick="fCreatePrinter()"><i class="fa-solid fa-check"></i> Confirmer</button>
+                	</div>
+ 
+                	<div class="container" style="background-color:#f1f1f1">
+                    	<button type="button" onclick="document.getElementById('id04').style.display='none'" class="cancelbtn">Annuler</button>
+                    	
+                	</div>
+            	</div>
+            	</div>
+				   
+				   <!-- Suppression d'imprimante -->
+				    <button class="btnNewUser2" onclick="document.getElementById('id05').style.display='block'" style="background-color: #ef4444;"><i class="fa-solid fa-trash"></i> Supprimer une imprimante</button>
+				   
+				    <div id="id05" class="modal">
+ 
+            	<div class="modal-content2 animate">
+                	<div class="imgcontainer">
+                    	<span onclick="document.getElementById('id05').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    	
+                	</div>
+ 
+                	<div class="container">
+                    	<label for="username"><b>Nom de l'imprimante</b></label>
+                    	<input type="text" id="dImprimante" placeholder="Imprimante" name="printer" required>
+                   	 
+                    	<button class="btnconnect" type="submit" onclick="fDeletePrinter()" >Confirmer la suppression</button>
+                    	
+                    	
+                	</div>
+ 
+                	<div class="container" style="background-color:#f1f1f1">
+                    	<button type="button" onclick="document.getElementById('id05').style.display='none'" class="cancelbtn">Annuler</button>
+                    	
+                	</div>
+				   </div>
+				</div>
+				   
+				   
+               </article>
+           </section>
+           	 
+            	
+        	</div>
+    		</div>
+	
+
+</div>
+<footer>
+</footer>
+</body>
+</html>
+
+

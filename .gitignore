@@ -1,0 +1,27 @@
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Dossiers personnels (optionnel - à décommenter si vous voulez les exclure)
+# Escaich - Dossier/
+# Ezzaoui - Dossier/
+# Seddak - Dossier/
+
+# Node modules (si vous ajoutez npm)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Fichiers IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Fichiers de configuration locaux
+.env
+.env.local

@@ -1,0 +1,1093 @@
+/* ===========================================
+   TRS FabLab - Modern Professional Stylesheet
+   =========================================== */
+
+/* Variables CSS pour faciliter la personnalisation */
+:root {
+    /* Couleurs principales - Palette professionnelle et lumineuse */
+    --primary-color: #2563eb;        /* Bleu professionnel */
+    --primary-hover: #1d4ed8;        /* Bleu plus foncé au survol */
+    --primary-light: #dbeafe;        /* Bleu très clair pour backgrounds */
+    
+    --secondary-color: #64748b;      /* Gris bleuté */
+    --success-color: #10b981;        /* Vert succès */
+    --danger-color: #ef4444;         /* Rouge danger */
+    --warning-color: #f59e0b;        /* Orange warning */
+    
+    /* Couleurs neutres */
+    --dark-color: #1e293b;           /* Texte principal */
+    --gray-700: #334155;
+    --gray-600: #475569;
+    --gray-500: #64748b;
+    --gray-400: #94a3b8;
+    --gray-300: #cbd5e1;
+    --gray-200: #e2e8f0;
+    --gray-100: #f1f5f9;
+    --white: #ffffff;
+    --background: #f8fafc;           /* Fond de page */
+    
+    /* Ombres */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    
+    /* Rayons de bordure */
+    --radius-sm: 4px;
+    --radius: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    
+    /* Transitions */
+    --transition: all 0.2s ease;
+    --transition-slow: all 0.3s ease;
+}
+
+/* Reset et base */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    color: var(--dark-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Container principal */
+.Container {
+    width: 100%;
+    min-width: 320px;
+    margin: 0;
+    padding: 0;
+}
+
+#main-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===========================================
+   Header
+   =========================================== */
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    min-height: 80px;
+    padding: 0 24px;
+    background: linear-gradient(135deg, var(--dark-color) 0%, var(--gray-700) 100%);
+    box-shadow: var(--shadow-md);
+}
+
+/* Image utilisateur dans le header */
+.userimg, .userimgA {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+}
+
+.userimg img, .userimgA img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-light);
+    transition: var(--transition);
+}
+
+.userimg img:hover, .userimgA img:hover {
+    border-color: var(--primary-color);
+    transform: scale(1.05);
+}
+
+/* Nom utilisateur dans le header */
+.utilisateur {
+    margin-left: 16px;
+    flex: 1;
+}
+
+.utilisateur span {
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+/* Bouton connexion */
+div.connexion, div.deconnexion {
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+}
+
+.btnconnexion {
+    margin-left: 0;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 600;
+    transition: var(--transition);
+    width: auto !important;
+}
+
+.btnconnexion:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Bouton déconnexion */
+.btnDeconnexion {
+    margin-left: auto;
+}
+
+.deconnexion {
+    width: auto !important;
+    padding: 10px 20px;
+    background-color: var(--danger-color);
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.deconnexion:hover {
+    background-color: #dc2626;
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+/* ===========================================
+   Navigation
+   =========================================== */
+nav {
+    width: 100%;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 0;
+    padding: 8px 16px;
+    list-style: none;
+}
+
+.nav li {
+    display: inline-block;
+}
+
+.nav li a {
+    display: inline-block;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--gray-600);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.nav li a:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+}
+
+.nav li a.actif,
+.nav li a.active {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.nav li a.actif:hover,
+.nav li a.active:hover {
+    background-color: var(--primary-hover);
+    color: var(--white);
+}
+
+.nav li a i {
+    margin-right: 6px;
+}
+
+/* ===========================================
+   Contenu principal
+   =========================================== */
+.content {
+    width: 100%;
+    min-height: calc(100vh - 200px);
+    padding: 32px 24px;
+    background-color: var(--background);
+    margin: 0;
+}
+
+.content:first-child {
+    margin-top: 0;
+}
+
+h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--dark-color);
+    margin: 0 0 32px 0;
+    padding: 0;
+}
+
+h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--gray-700);
+    margin: 24px 0 12px 0;
+    padding-left: 0;
+}
+
+/* ===========================================
+   Section description / Accueil
+   =========================================== */
+.main_articles {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 40px auto;
+    float: none;
+    height: auto;
+    border-bottom: none;
+}
+
+.siteDescription {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    padding: 24px;
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+}
+
+.desImage {
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+}
+
+.desImage img {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-lg);
+    object-fit: cover;
+}
+
+.des, .desA {
+    flex: 1;
+    margin-left: 0;
+    padding: 20px;
+    background-color: var(--primary-light);
+    border-radius: var(--radius);
+    border: none;
+    height: auto;
+}
+
+.des span, .desA span {
+    display: block;
+    padding-top: 0;
+    color: var(--gray-700);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* Sidebar (non utilisé dans la version actuelle mais gardé) */
+.side_article {
+    position: static;
+    width: 100%;
+    max-width: 300px;
+    float: none;
+    height: auto;
+    border-left: none;
+    margin: 0 auto;
+}
+
+.ads {
+    width: 100%;
+    margin: 16px 0;
+    padding: 24px;
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+}
+
+.ads:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.ads span {
+    display: block;
+    padding-top: 0;
+    color: var(--gray-600);
+    font-weight: 500;
+}
+
+/* ===========================================
+   Tableaux
+   =========================================== */
+.tab {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    overflow-x: auto;
+}
+
+.tableau-style {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+thead tr {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+    color: var(--white);
+}
+
+th {
+    padding: 16px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: left;
+    border: none;
+}
+
+td {
+    padding: 14px 20px;
+    font-size: 14px;
+    color: var(--gray-700);
+    border-bottom: 1px solid var(--gray-200);
+    text-align: left;
+}
+
+tbody tr {
+    transition: var(--transition);
+}
+
+tbody tr:hover {
+    background-color: var(--primary-light);
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--gray-100);
+}
+
+tbody tr:nth-child(even):hover {
+    background-color: var(--primary-light);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ===========================================
+   Boutons généraux
+   =========================================== */
+button {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 12px 24px;
+    margin: 8px 0;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+button:hover {
+    background-color: var(--primary-hover);
+    opacity: 1;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.btnNewUser, .btnNewUser2 {
+    width: auto !important;
+    padding: 12px 24px;
+    margin: 16px 8px;
+    background-color: var(--primary-color);
+    border-radius: var(--radius);
+}
+
+.btnNewUser:hover, .btnNewUser2:hover {
+    background-color: var(--primary-hover);
+}
+
+.btnconnect {
+    width: 100%;
+    padding: 14px 24px;
+    background-color: var(--primary-color);
+    border-radius: var(--radius);
+    font-size: 15px;
+}
+
+.btnconnect:hover {
+    background-color: var(--primary-hover);
+}
+
+.cancelbtn {
+    width: auto;
+    padding: 12px 24px;
+    background-color: var(--gray-500);
+    border-radius: var(--radius);
+}
+
+.cancelbtn:hover {
+    background-color: var(--gray-600);
+}
+
+/* ===========================================
+   Modal / Popup
+   =========================================== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    padding-top: 0;
+}
+
+.modal-content, .modal-content2 {
+    background-color: var(--white);
+    margin: 5% auto;
+    border: none;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    max-width: 420px;
+    width: 90%;
+    animation: modalSlideIn 0.3s ease;
+}
+
+.modal-content {
+    max-width: 480px;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.imgcontainer {
+    text-align: center;
+    padding: 32px 24px 16px 24px;
+    position: relative;
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--white) 100%);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+img.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid var(--primary-color);
+    object-fit: cover;
+}
+
+.close {
+    position: absolute;
+    right: 16px;
+    top: 12px;
+    color: var(--gray-500);
+    font-size: 28px;
+    font-weight: 400;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.close:hover {
+    background-color: var(--danger-color);
+    color: var(--white);
+    cursor: pointer;
+}
+
+.container {
+    padding: 24px;
+}
+
+.container[style*="background-color:#f1f1f1"],
+.container[style*="background-color: #f1f1f1"] {
+    background-color: var(--gray-100) !important;
+    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+/* Champs de formulaire */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 14px 16px;
+    margin: 8px 0 16px 0;
+    display: block;
+    border: 2px solid var(--gray-300);
+    border-radius: var(--radius);
+    font-size: 15px;
+    transition: var(--transition);
+    background-color: var(--white);
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+input[type=text]::placeholder, input[type=password]::placeholder {
+    color: var(--gray-400);
+}
+
+label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-700);
+}
+
+label[for="remember"] {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+}
+
+span.psw {
+    float: none;
+    padding-top: 0;
+}
+
+span.psw a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+span.psw a:hover {
+    text-decoration: underline;
+}
+
+/* Info box pour les comptes de test */
+.test-credentials {
+    background-color: var(--primary-light);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-top: 16px;
+    border: 1px solid var(--primary-color);
+}
+
+.test-credentials code {
+    background-color: var(--white);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 13px;
+    color: var(--primary-color);
+    border: 1px solid var(--gray-300);
+}
+
+/* ===========================================
+   Gestion utilisateurs
+   =========================================== */
+.Ulist {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 24px auto;
+    padding: 0;
+    list-style: none;
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+}
+
+.listUser {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--gray-200);
+    transition: var(--transition);
+}
+
+.listUser:last-child {
+    border-bottom: none;
+}
+
+.listUser:hover {
+    background-color: var(--primary-light);
+}
+
+.userimg2 {
+    width: 44px;
+    height: 44px;
+    margin-right: 16px;
+    flex-shrink: 0;
+}
+
+.userimg2 img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.userList {
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.userList span {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--gray-700);
+}
+
+/* Boutons de gestion utilisateurs */
+article.Users {
+    text-align: center;
+}
+
+/* ===========================================
+   Gestion imprimantes
+   =========================================== */
+.listImprimantes {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto 24px auto;
+    max-height: 450px;
+    overflow-y: auto;
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+}
+
+.imprimantes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px 24px;
+    margin: 0;
+    width: 100%;
+    border-bottom: 1px solid var(--gray-200);
+    transition: var(--transition);
+}
+
+.imprimantes:last-child {
+    border-bottom: none;
+}
+
+.imprimantes:hover {
+    background-color: var(--primary-light);
+}
+
+.impImg {
+    width: 60px;
+    flex-shrink: 0;
+}
+
+.impImg img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+}
+
+.impEtat {
+    padding-left: 20px;
+    padding-top: 0;
+}
+
+.impEtat p {
+    margin: 4px 0;
+    font-size: 14px;
+    color: var(--gray-700);
+}
+
+.impEtat p:first-child {
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+/* Boutons de gestion imprimantes */
+article.Imp {
+    text-align: center;
+}
+
+/* ===========================================
+   Graphiques
+   =========================================== */
+#graph {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px;
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+}
+
+canvas {
+    padding-left: 0;
+    width: 100% !important;
+    max-width: 100%;
+}
+
+.stats_box h4 {
+    color: var(--dark-color);
+    font-size: 16px;
+    margin: 24px 0 16px 0;
+    padding-left: 0;
+}
+
+.stats_box h4:first-child {
+    margin-top: 0;
+}
+
+/* ===========================================
+   Footer
+   =========================================== */
+footer {
+    position: relative;
+    width: 100%;
+    min-height: 60px;
+    background: linear-gradient(135deg, var(--dark-color) 0%, var(--gray-700) 100%);
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+footer::before {
+    content: "© 2026 TRS FabLab - Gestion d'imprimantes 3D";
+    color: var(--gray-400);
+    font-size: 13px;
+}
+
+/* ===========================================
+   Scrollbars personnalisées
+   =========================================== */
+body::-webkit-scrollbar,
+.Ulist::-webkit-scrollbar,
+.listImprimantes::-webkit-scrollbar,
+ul::-webkit-scrollbar {
+    width: 8px;
+}
+
+body::-webkit-scrollbar-track,
+.Ulist::-webkit-scrollbar-track,
+.listImprimantes::-webkit-scrollbar-track,
+ul::-webkit-scrollbar-track {
+    background: var(--gray-100);
+    border-radius: 4px;
+}
+
+body::-webkit-scrollbar-thumb,
+.Ulist::-webkit-scrollbar-thumb,
+.listImprimantes::-webkit-scrollbar-thumb,
+ul::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    border: 2px solid var(--gray-100);
+}
+
+body::-webkit-scrollbar-thumb:hover,
+.Ulist::-webkit-scrollbar-thumb:hover,
+.listImprimantes::-webkit-scrollbar-thumb:hover,
+ul::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-hover);
+}
+
+/* ===========================================
+   Responsive Design
+   =========================================== */
+@media screen and (max-width: 768px) {
+    header {
+        padding: 16px;
+        min-height: 70px;
+    }
+    
+    .userimg, .userimgA {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .utilisateur span {
+        font-size: 16px;
+    }
+    
+    .nav {
+        padding: 8px;
+        gap: 2px;
+    }
+    
+    .nav li a {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+    
+    .content {
+        padding: 20px 16px;
+    }
+    
+    h1 {
+        font-size: 22px;
+    }
+    
+    .siteDescription {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .desImage {
+        width: 100px;
+        height: 100px;
+    }
+    
+    th, td {
+        padding: 12px 14px;
+        font-size: 13px;
+    }
+    
+    .modal-content, .modal-content2 {
+        margin: 10% auto;
+        width: 95%;
+    }
+    
+    .btnNewUser, .btnNewUser2 {
+        display: block;
+        width: 100% !important;
+        margin: 8px 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    
+    .nav li a {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+    
+    .btnconnexion {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+    
+    .deconnexion {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+    
+    th, td {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+}
+
+/* ===========================================
+   Animations
+   =========================================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.animate {
+    animation: modalSlideIn 0.3s ease;
+}
+
+/* Animation pour les lignes de tableau */
+tbody tr {
+    animation: fadeIn 0.3s ease;
+}
+
+/* ===========================================
+   Utilitaires
+   =========================================== */
+.text-center {
+    text-align: center;
+}
+
+.mt-4 {
+    margin-top: 16px;
+}
+
+.mb-4 {
+    margin-bottom: 16px;
+}
+
+/* ===========================================
+   États des badges
+   =========================================== */
+.status-active {
+    color: var(--success-color);
+}
+
+.status-inactive {
+    color: var(--danger-color);
+}
+
+.status-pending {
+    color: var(--warning-color);
+}
+
+/* Badges pour les états */
+td:has(.fa-circle) i {
+    margin-right: 4px;
+    font-size: 8px;
+    vertical-align: middle;
+}
+
+/* ===========================================
+   Améliorations pour portfolio
+   =========================================== */
+
+/* Effet de survol sur les cartes */
+.siteDescription:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    transition: var(--transition);
+}
+
+/* Style des icônes dans les titres */
+h1 i {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+/* Navigation active avec animation */
+.nav li a {
+    position: relative;
+    overflow: hidden;
+}
+
+.nav li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: var(--transition);
+    transform: translateX(-50%);
+}
+
+.nav li a:hover::after {
+    width: 80%;
+}
+
+.nav li a.actif::after,
+.nav li a.active::after {
+    display: none;
+}
+
+/* Amélioration des listes */
+.listUser:first-child,
+.imprimantes:first-child {
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.listUser:last-child,
+.imprimantes:last-child {
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+/* Focus visible pour l'accessibilité */
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Animation d'entrée pour les pages */
+#pageAccueilO,
+#pageAccueilU,
+#accueilA,
+#gestionUser,
+#pageGraphO,
+#imprimante {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Style pour les boutons avec icônes */
+button i {
+    margin-right: 6px;
+}
+
+/* Amélioration du formulaire de connexion */
+.modal-content .container:first-of-type {
+    padding-top: 8px;
+}
